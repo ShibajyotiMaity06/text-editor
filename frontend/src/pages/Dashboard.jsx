@@ -13,7 +13,7 @@ const Dashboard = () => {
 
     const fetchDocuments = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/documents');
+            const res = await axios.get('https://text-editor-backend-1-0d6p.onrender.com/api/documents');
             setDocuments(res.data);
         } catch (error) {
             console.error('Error fetching documents:', error);
@@ -22,7 +22,7 @@ const Dashboard = () => {
 
     const createDocument = async () => {
         try {
-            const res = await axios.post('http://localhost:5000/api/documents', { title: 'Untitled Document' });
+            const res = await axios.post('https://text-editor-backend-1-0d6p.onrender.com/api/documents', { title: 'Untitled Document' });
             navigate(`/editor/${res.data._id}`);
         } catch (error) {
             console.error('Error creating document:', error);
@@ -33,7 +33,7 @@ const Dashboard = () => {
         e.stopPropagation();
         if (!window.confirm('Are you sure?')) return;
         try {
-            await axios.delete(`http://localhost:5000/api/documents/${id}`);
+            await axios.delete(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${id}`);
             fetchDocuments();
         } catch (error) {
             console.error('Error deleting document:', error);

@@ -34,7 +34,7 @@ const Editor = ({ documentId }) => {
     }, [title]);
 
     useEffect(() => {
-        const s = io('http://localhost:5000');
+        const s = io('https://text-editor-backend-1-0d6p.onrender.com');
         setSocket(s);
 
         return () => {
@@ -57,7 +57,7 @@ const Editor = ({ documentId }) => {
 
         const fetchDocument = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/documents/${documentId}`);
+                const res = await axios.get(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${documentId}`);
                 setTitle(res.data.title);
                 setContent(res.data.content);
                 setUserRole(res.data.role || 'editor');
@@ -137,7 +137,7 @@ const Editor = ({ documentId }) => {
     const saveDocument = async (silent = false) => {
         if (silent) setSaveStatus('Saving...');
         try {
-            await axios.put(`http://localhost:5000/api/documents/${documentId}`, {
+            await axios.put(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${documentId}`, {
                 title: titleRef.current,
                 content: contentRef.current
             });
@@ -173,7 +173,7 @@ const Editor = ({ documentId }) => {
                 context = editor.getText();
             }
 
-            const res = await axios.post('http://localhost:5000/api/ai/generate', {
+            const res = await axios.post('https://text-editor-backend-1-0d6p.onrender.com/api/ai/generate', {
                 prompt: aiPrompt,
                 context: context,
                 type: type

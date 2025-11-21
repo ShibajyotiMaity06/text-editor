@@ -16,7 +16,7 @@ const EditorPage = () => {
         const checkAccess = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const res = await axios.get(`http://localhost:5000/api/documents/${id}`, {
+                const res = await axios.get(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
 
@@ -39,7 +39,7 @@ const EditorPage = () => {
     const handleRequestAccess = async () => {
         try {
             const token = localStorage.getItem('token');
-            await axios.post(`http://localhost:5000/api/documents/${id}/request-access`, {}, {
+            await axios.post(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${id}/request-access`, {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setHasPendingRequest(true);
@@ -52,7 +52,7 @@ const EditorPage = () => {
     const handleGrantAccess = async (userId, role) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.post(`http://localhost:5000/api/documents/${id}/grant-access`, { userId, role }, {
+            await axios.post(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${id}/grant-access`, { userId, role }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             alert('Access granted!');

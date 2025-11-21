@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = async (email, password) => {
-        const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+        const res = await axios.post('https://text-editor-backend-1-0d6p.onrender.com/api/auth/login', { email, password });
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('user', JSON.stringify(res.data.user));
         axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const register = async (username, email, password) => {
-        await axios.post('http://localhost:5000/api/auth/register', { username, email, password });
+        await axios.post('https://text-editor-backend-1-0d6p.onrender.com/api/auth/register', { username, email, password });
     };
 
     const logout = () => {
