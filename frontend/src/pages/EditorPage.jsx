@@ -17,7 +17,8 @@ const EditorPage = () => {
             try {
                 const token = localStorage.getItem('token');
                 const res = await axios.get(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${id}`, {
-                    headers: { Authorization: `Bearer ${token}` }
+                    headers: { Authorization: `Bearer ${token}` },
+                    withCredentials: true
                 });
 
                 if (res.data.role === 'owner') {
@@ -40,7 +41,8 @@ const EditorPage = () => {
         try {
             const token = localStorage.getItem('token');
             await axios.post(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${id}/request-access`, {}, {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` },
+                withCredentials: true
             });
             setHasPendingRequest(true);
             alert('Access requested!');
@@ -53,7 +55,8 @@ const EditorPage = () => {
         try {
             const token = localStorage.getItem('token');
             await axios.post(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${id}/grant-access`, { userId, role }, {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` },
+                withCredentials: true
             });
             alert('Access granted!');
             setRefreshTrigger(prev => prev + 1); // Refresh to update list

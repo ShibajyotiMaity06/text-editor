@@ -57,7 +57,7 @@ const Editor = ({ documentId }) => {
 
         const fetchDocument = async () => {
             try {
-                const res = await axios.get(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${documentId}`);
+                const res = await axios.get(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${documentId}`, { withCredentials: true });
                 setTitle(res.data.title);
                 setContent(res.data.content);
                 setUserRole(res.data.role || 'editor');
@@ -140,7 +140,7 @@ const Editor = ({ documentId }) => {
             await axios.put(`https://text-editor-backend-1-0d6p.onrender.com/api/documents/${documentId}`, {
                 title: titleRef.current,
                 content: contentRef.current
-            });
+            }, { withCredentials: true });
             if (!silent) alert('Saved!');
             setSaveStatus('Saved');
             setTimeout(() => setSaveStatus(''), 3000);
@@ -178,7 +178,8 @@ const Editor = ({ documentId }) => {
                 context: context,
                 type: type
             }, {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` },
+                withCredentials: true
             });
             setAiSuggestion(res.data.suggestion);
         } catch (error) {
